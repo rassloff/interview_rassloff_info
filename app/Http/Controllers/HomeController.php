@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -21,8 +23,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(): \Illuminate\Contracts\Support\Renderable
     {
-        return view('home');
+        $userCount = $this->countUsers();
+        return view('home', compact('userCount'));
+    }
+
+    public function countUsers(): int
+    {
+        $userCount = User::all()->count();
+        //Log::debug('bla bla ' . $userCount );
+        return $userCount;
     }
 }

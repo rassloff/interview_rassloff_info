@@ -15,6 +15,9 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                        <span class="h4 d-block font-weight-normal mb-2">
+                            Anzahl User: {{ $userCount }}
+                        </span>
                 </div>
             </div>
         </div>
