@@ -16,6 +16,12 @@ return new class extends Migration
         Schema::create('interview_answers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->text('answer');
+
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->foreign('updated_by')->references('id')->on('users');
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->foreign('created_by')->references('id')->on('users');
         });
     }
 
