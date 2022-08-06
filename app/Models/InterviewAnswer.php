@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class InterviewAnswer extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'answer',
+    ];
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }

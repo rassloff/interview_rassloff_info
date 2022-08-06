@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Laravel Interview Application rassloff.info</title>
+    <title>Interview Application rassloff.info</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -34,10 +34,16 @@
                 <ul class="navbar-nav me-auto">
                     @auth
                         <li class="nav-item">
-                            <a href="{{ route('home') }}">Home </a>
+                            <a class="nav-link" href="{{ route('home') }}">Home </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/interviews"> Interviews </a>
+                            <a class="nav-link" href="/interviews"> Interviews </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/interviewQuestions"> Questions </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/interviewAnswers"> Answers </a>
                         </li>
                     @endauth
                 </ul>

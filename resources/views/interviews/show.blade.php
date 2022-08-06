@@ -25,5 +25,27 @@
                 {{ $interview->text }}
             </div>
         </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Created:</strong>
+                {{ $interview->created_at }}
+                @if ($interview->created_by)
+                    by
+                    {{ $interview->createdBy->firstname }}
+                @endif
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Updated:</strong>
+                {{ $interview->updated_at }}
+                @if ($interview->updated_by)
+                    by
+                    {{ $interview->updatedBy->firstname }}
+                @endif
+            </div>
+        </div>
     </div>
 @endsection

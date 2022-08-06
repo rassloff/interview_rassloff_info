@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\InterviewAnswerController;
 use App\Http\Controllers\InterviewController;
+use App\Http\Controllers\InterviewQuestionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +29,6 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::resource('interviews', InterviewController::class);
+    Route::resource('interviewQuestions', InterviewQuestionController::class);
+    Route::resource('interviewAnswers', InterviewAnswerController::class);
 });
