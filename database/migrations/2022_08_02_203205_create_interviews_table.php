@@ -16,6 +16,13 @@ return new class extends Migration
         Schema::create('interviews', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('title');
+            $table->text('text');
+
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->foreign('updated_by')->references('id')->on('users');
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->foreign('created_by')->references('id')->on('users');
         });
     }
 
