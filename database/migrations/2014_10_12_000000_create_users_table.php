@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('lastname')->nullable();
             $table->string('city')->nullable();
             $table->string('country')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('year_of_birth')->nullable();
             $table->integer('sec_level')->default(0);
 
             $table->integer('updated_by')->unsigned()->nullable();

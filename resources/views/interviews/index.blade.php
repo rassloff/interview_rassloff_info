@@ -18,13 +18,13 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>No</th>
+            <th>ID</th>
             <th>Title</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($interviews as $interview)
             <tr>
-                <td>{{ ++$i }} ID: {{ $interview->id }}</td>
+                <td>{{ $interview->id }}</td>
                 <td>{{ $interview->title }}</td>
                 <td>
                     <form action="{{ route('interviews.destroy',$interview->id) }}" method="POST">

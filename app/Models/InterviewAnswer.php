@@ -13,12 +13,22 @@ class InterviewAnswer extends Model
         'answer',
     ];
 
-    public function createdBy()
+    public function interview(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Interview::class, 'interview_id');
+    }
+
+    public function question(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Interview::class, 'interview_id');
+    }
+
+    public function createdBy(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function updatedBy()
+    public function updatedBy(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
     }

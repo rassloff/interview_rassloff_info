@@ -32,7 +32,7 @@
                 {{ $interview->created_at }}
                 @if ($interview->created_by)
                     by
-                    {{ $interview->createdBy->firstname }}
+                    {{ $interview->createdBy->name }}
                 @endif
             </div>
         </div>
@@ -43,7 +43,7 @@
                 {{ $interview->updated_at }}
                 @if ($interview->updated_by)
                     by
-                    {{ $interview->updatedBy->firstname }}
+                    {{ $interview->updatedBy->name }}
                 @endif
             </div>
         </div>
