@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Interview;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InterviewController extends Controller
 {
@@ -45,7 +46,10 @@ class InterviewController extends Controller
             'text' => 'required',
         ]);
 
-        Interview::create($request->all());
+        $interview = Interview::create($request->all());
+
+        $interview->createdBy()->associate(Auth::user());
+        $interview->update();
 
         return redirect()->route('interviews.index')
             ->with('success','Interview created successfully.');
@@ -88,6 +92,10 @@ class InterviewController extends Controller
         ]);
 
         $interview->update($request->all());
+
+        $interview->updatedBy()->associate(Auth::user());
+        $interview->update();
+
 
         return redirect()->route('interviews.index')
             ->with('success','Interview updated successfully');

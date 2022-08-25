@@ -32,7 +32,7 @@
                     <ul class="navbar-nav me-auto">
                         @auth
                             <li class="nav-item">
-                                <a href="/interviews"> Interviews </a>
+                                <a class="nav-link" href="/interviews"> Interviews </a>
                             </li>
                         @endauth
                     </ul>
