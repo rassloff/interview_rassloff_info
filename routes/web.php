@@ -30,5 +30,17 @@ Route::group(['middleware' => 'auth'], function()
 
     Route::resource('interviews', InterviewController::class);
     Route::resource('interviewQuestions', InterviewQuestionController::class);
+
+    Route::get('interviewQuestion/{interview_id}/', [InterviewController::class, 'addQuestion'])->name('interviews.addQuestion');
+
+
+    Route::post('storeInterviewQuestion/{interview_id}', [InterviewController::class, 'storeQuestion'])
+        ->name('interviews.storeQuestion');
+
     Route::resource('interviewAnswers', InterviewAnswerController::class);
+
+    //Route::post('addQuestion/{interview_id}', InterviewController::class, 'addQuestion')->name('addQuestion');
+
+    //Route::post('/addQuestion/{interview_id}', 'InterviewController@addQuestion')->name('addQuestion');
+    //Route::put('/storeQuestion/{interview_id}', 'InterviewController@storeQuestion')->name('storeQuestion');
 });

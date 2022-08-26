@@ -10,6 +10,7 @@ class InterviewQuestion extends Model
     use HasFactory;
 
     protected $fillable = [
+        'interview_id',
         'question',
     ];
 

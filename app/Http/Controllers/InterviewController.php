@@ -3,11 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Interview;
+use App\Models\InterviewQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class InterviewController extends Controller
 {
+    public function addQuestion( $interview_id )
+    {
+        Log::debug('in add interview_id='.$interview_id);
+        return view('interviews.addQuestion' )->with('interview_id', $interview_id);
+    }
+
+    public function storeQuestion(Request $request, $interview_id)
+    {
+        //Log::debug('in store interview_id='.$interview_id);
+        //Log::debug('in store question = ' . $request->question );
+
+        $request['interview_id'] = $interview_id;
+
+        $request->validate([
+            'question' => 'required',
+        ]);
+
+        $interviewQuestion = InterviewQuestion::create($request->all());
+
+        $interviewQuestion->createdBy()->associate(Auth::user());
+        $interviewQuestion->updatedBy()->associate(Auth::user());
+        $interviewQuestion->update();
+
+        return redirect()->route('interviews.show', $interview_id)->with('success', 'Interview Question saved correctly!!!');
+    }
     /**
      * Display a listing of the resource.
      *

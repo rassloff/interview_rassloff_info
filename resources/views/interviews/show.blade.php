@@ -47,5 +47,18 @@
                 @endif
             </div>
         </div>
+
+        - add new question<br>
+        <a class="btn btn-primary" href="{{ url("interviewQuestion/".$interview->id."/") }}">
+            add new Question to Interview
+        </a>
+
+
+
+        - add an existing question<br>
+        - add an answer<br>
+
+        List of Questions:<br><br>
+
     </div>
 @endsection
