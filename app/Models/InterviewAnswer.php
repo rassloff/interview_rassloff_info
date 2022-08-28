@@ -11,6 +11,8 @@ class InterviewAnswer extends Model
 
     protected $fillable = [
         'answer',
+        'interview_id',
+        'question_id',
     ];
 
     public function interview(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -20,7 +22,7 @@ class InterviewAnswer extends Model
 
     public function question(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Interview::class, 'interview_id');
+        return $this->belongsTo(InterviewQuestion::class, 'question_id');
     }
 
     public function createdBy(): \Illuminate\Database\Eloquent\Relations\BelongsTo

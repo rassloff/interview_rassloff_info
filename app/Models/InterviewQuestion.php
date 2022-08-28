@@ -10,8 +10,14 @@ class InterviewQuestion extends Model
     use HasFactory;
 
     protected $fillable = [
+        'interview_id',
         'question',
     ];
+
+    public function answers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(InterviewAnswer::class, 'question_id');
+    }
 
     public function interview(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

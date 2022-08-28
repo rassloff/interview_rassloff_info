@@ -17,12 +17,12 @@ class Interview extends Model
 
     public function questions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Interview::class);
+        return $this->hasMany(InterviewQuestion::class);
     }
 
     public function answers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Interview::class);
+        return $this->hasMany(InterviewAnswer::class);
     }
 
     public function createdBy(): \Illuminate\Database\Eloquent\Relations\BelongsTo

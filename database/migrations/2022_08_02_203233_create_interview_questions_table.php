@@ -18,8 +18,11 @@ return new class extends Migration
             $table->timestamps();
             $table->text('question');
 
-            $table->integer('interview_id')->unsigned()->nullable();
-            $table->foreign('interview_id')->references('id')->on('interviews');
+            $table->unsignedBigInteger('interview_id');
+            $table->foreign('interview_id')
+                ->references('id')
+                ->on('interviews')
+                ->onDelete('cascade');
 
             $table->integer('updated_by')->unsigned()->nullable();
             $table->foreign('updated_by')->references('id')->on('users');

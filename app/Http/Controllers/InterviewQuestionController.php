@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\InterviewQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class InterviewQuestionController extends Controller
 {
@@ -28,9 +29,19 @@ class InterviewQuestionController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function create(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function create(Request $request, $interview_id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('interviewQuestions.create');
+        Log::debug('id=' . $interview_id);
+
+        $interview_id = $request->interview_id;
+        if(isset($interview_id)){
+            //echo "bla ballala . $interview_id";
+            Log::debug('id=' . $interview_id);
+        }
+        else{
+            Log::debug('no id=' . $interview_id);
+        }
+        return view('interviewQuestions.create', compact('interview_id'));
     }
 
     /**
@@ -48,6 +59,7 @@ class InterviewQuestionController extends Controller
         $question = InterviewQuestion::create($request->all());
 
         $question->createdBy()->associate(Auth::user());
+        $question->updatedBy()->associate(Auth::user());
         $question->update();
 
         return redirect()->route('interviewQuestions.index')
