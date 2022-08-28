@@ -22,6 +22,16 @@ return new class extends Migration
             //$table->foreign('interview_id')->references('id')->on('interviews');
             //$table->integer('question_id')->unsigned()->nullable();
             //$table->foreign('question_id')->references('id')->on('interview_questions');
+            $table->unsignedBigInteger('interview_id');
+            $table->foreign('interview_id')
+                ->references('id')
+                ->on('interviews')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('question_id');
+            $table->foreign('question_id')
+                ->references('id')
+                ->on('interview_questions')
+                ->onDelete('cascade');
 
             $table->integer('updated_by')->unsigned()->nullable();
             $table->foreign('updated_by')->references('id')->on('users');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Interview;
+use App\Models\InterviewAnswer;
 use App\Models\InterviewQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,14 @@ class InterviewController extends Controller
     {
         Log::debug('in add interview_id='.$interview_id);
         return view('interviews.addQuestion' )->with('interview_id', $interview_id);
+    }
+
+    public function addAnswer( $interview_id, $interview_question_id )
+    {
+        Log::debug('in add interview_id='.$interview_id);
+        Log::debug('in add interview_question_id='.$interview_question_id);
+        //return view('interviews.addAnswer' )->with('interview_id', $interview_id);
+        return view('interviews.addAnswer', compact('interview_id', 'interview_question_id'));
     }
 
     public function storeQuestion(Request $request, $interview_id)
@@ -35,6 +44,28 @@ class InterviewController extends Controller
 
         return redirect()->route('interviews.show', $interview_id)->with('success', 'Interview Question saved correctly!!!');
     }
+
+    public function storeAnswer(Request $request, $interview_id, $interview_question_id)
+    {
+        Log::debug('in store interview_id=' . $interview_id);
+        Log::debug('in store answer = ' . $interview_question_id );
+
+        $request['interview_id'] = $interview_id;
+        $request['question_id'] = $interview_question_id;
+
+        $request->validate([
+            'answer' => 'required',
+        ]);
+
+        $interviewAnswer = InterviewAnswer::create($request->all());
+
+        $interviewAnswer->createdBy()->associate(Auth::user());
+        $interviewAnswer->updatedBy()->associate(Auth::user());
+        $interviewAnswer->update();
+
+        return redirect()->route('interviews.show', $interview_id)->with('success', 'Interview Answer saved correctly!!!');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -76,6 +107,7 @@ class InterviewController extends Controller
         $interview = Interview::create($request->all());
 
         $interview->createdBy()->associate(Auth::user());
+        $interview->updatedBy()->associate(Auth::user());
         $interview->update();
 
         return redirect()->route('interviews.index')

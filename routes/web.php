@@ -32,10 +32,13 @@ Route::group(['middleware' => 'auth'], function()
     Route::resource('interviewQuestions', InterviewQuestionController::class);
 
     Route::get('interviewQuestion/{interview_id}/', [InterviewController::class, 'addQuestion'])->name('interviews.addQuestion');
-
+    Route::get('interviewAnswer/{interview_id}/add/{interview_question_id}', [InterviewController::class, 'addAnswer'])->name('interviews.addAnswer');
 
     Route::post('storeInterviewQuestion/{interview_id}', [InterviewController::class, 'storeQuestion'])
         ->name('interviews.storeQuestion');
+
+    Route::post('storeInterviewAnswer/{interview_id}/store/{interview_question_id}', [InterviewController::class, 'storeAnswer'])
+        ->name('interviews.storeAnswer');
 
     Route::resource('interviewAnswers', InterviewAnswerController::class);
 

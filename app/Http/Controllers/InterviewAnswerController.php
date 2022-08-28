@@ -48,6 +48,7 @@ class InterviewAnswerController extends Controller
         $interview = InterviewAnswer::create($request->all());
 
         $interview->createdBy()->associate(Auth::user());
+        $interview->updatedBy()->associate(Auth::user());
         $interview->update();
 
         return redirect()->route('interviewAnswers.index')

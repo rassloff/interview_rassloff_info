@@ -52,13 +52,31 @@
         <a class="btn btn-primary" href="{{ url("interviewQuestion/".$interview->id."/") }}">
             add new Question to Interview
         </a>
-
-
-
+        <br>
+        List of Questions:<br>
+        <table>
+        @foreach($interview->questions as $question)
+            <tr>
+                <td>{{$question->id}}</td>
+                <td>{{$question->question}}</td>
+                <td>
+                    @foreach($interview->answers as $answer)
+                        @if($answer->question_id == $question->id)
+                            {{$answer->answer}}
+                        @else
+                            <a class="btn btn-primary" href="{{ url("interviewAnswer/" . $interview->id . "/add/" . $question->id) }}">
+                                add answer
+                            </a>
+                        @endif
+                    @endforeach
+                </td>
+            </tr>
+        @endforeach
+        </table>
         - add an existing question<br>
         - add an answer<br>
 
-        List of Questions:<br><br>
+        <br>
 
     </div>
 @endsection
