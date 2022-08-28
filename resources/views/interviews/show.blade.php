@@ -46,12 +46,12 @@
                     {{ $interview->updatedBy->name }}
                 @endif
             </div>
+            <br>
+            <a class="btn btn-primary" href="{{ url("interviewQuestion/".$interview->id."/") }}">
+                add new Question to Interview
+            </a>
         </div>
 
-        - add new question<br>
-        <a class="btn btn-primary" href="{{ url("interviewQuestion/".$interview->id."/") }}">
-            add new Question to Interview
-        </a>
         <br>
         List of Questions:<br>
         <table>
@@ -61,6 +61,7 @@
                 <td>{{$question->question}}</td>
                 <td>
                     @foreach($interview->answers as $answer)
+                        ???
                         @if($answer->question_id == $question->id)
                             {{$answer->answer}}
                         @else
@@ -69,12 +70,16 @@
                             </a>
                         @endif
                     @endforeach
+                    @if($interview->answers->count() == 0)
+                            <a class="btn btn-primary" href="{{ url("interviewAnswer/" . $interview->id . "/add/" . $question->id) }}">
+                                add answer
+                            </a>
+                        @endif
                 </td>
             </tr>
         @endforeach
         </table>
-        - add an existing question<br>
-        - add an answer<br>
+        - add an existing question - via select <br>
 
         <br>
 
