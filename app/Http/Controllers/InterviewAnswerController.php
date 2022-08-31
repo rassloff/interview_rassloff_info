@@ -15,10 +15,10 @@ class InterviewAnswerController extends Controller
      */
     public function index()
     {
-        $interviewAnswers = InterviewAnswer::latest()->paginate(5);
+        $answers = InterviewAnswer::latest()->paginate(5);
 
         return view('interviewAnswers.index',
-            compact('interviewAnswers'))
+            compact('answers'))
             ->with('i', (request()
                         ->input('page', 1) - 1) * 5);
     }
